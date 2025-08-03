@@ -216,6 +216,7 @@ body {
 
 /* selected products */
 .selected-products {
+  position: relative;
   margin: 40px 0;
   padding: 20px;
   border: 2px solid #000;
@@ -422,4 +423,103 @@ body {
   color: #666;
   margin-bottom: 1.2rem;
   font-size: 0.9rem;
+}
+/* Style the clear button */
+#clearSelection {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: #ff003b; /* L'Oréal red */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 6px rgba(255, 0, 59, 0.4);
+  z-index: 10;
+}
+
+#clearSelection:hover {
+  background-color: #cc002f;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 110px;
+  align-items: center; /* Center children horizontally */
+  gap: 10px; /* Add some vertical spacing */
+}
+
+.product-info button.desc-toggle {
+  background-color: #ff003b;
+  color: white;
+  border: none;
+  padding: 8px 14px; /* smaller padding */
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: fit-content; /* button shrinks to fit text */
+  min-width: 120px; /* optional: keep some minimum width */
+  text-align: center; /* center text inside */
+}
+
+.product-info button.desc-toggle:hover {
+  background-color: #cc002f; /* Darker red on hover */
+}
+
+/* Selected products list as vertical bullet list */
+#selectedProductsList {
+  display: flex;
+  flex-direction: column; /* vertical stacking */
+  gap: 8px; /* spacing between items */
+  padding-left: 16px; /* indent for bullets */
+}
+
+/* Each selected product item styling */
+#selectedProductsList .selected-item {
+  font-size: 16px;
+  line-height: 1.4;
+  position: relative;
+  padding-left: 14px;
+}
+
+/* Bullet before each selected product */
+#selectedProductsList .selected-item::before {
+  content: "•"; /* bullet character */
+  color: #e3a535; /* L'Oréal gold */
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: bold;
+}
+
+[dir="rtl"] .product-card {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] #clearSelection {
+  right: auto;
+  left: 16px;
+}
+
+[dir="rtl"] #selectedProductsList {
+  padding-left: 0;
+  padding-right: 16px;
+}
+
+[dir="rtl"] #selectedProductsList .selected-item {
+  padding-left: 0;
+  padding-right: 14px;
+}
+
+[dir="rtl"] #selectedProductsList .selected-item::before {
+  left: auto;
+  right: 0;
 }

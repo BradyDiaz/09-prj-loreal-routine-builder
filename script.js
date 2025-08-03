@@ -15,6 +15,19 @@ const modalBrand = document.getElementById("modalBrand");
 const modalDesc = document.getElementById("modalDesc");
 const closeModal = document.querySelector(".close-modal");
 
+// Set RTL direction based on user language
+document.addEventListener("DOMContentLoaded", () => {
+  const rtlLangs = ["ar", "he", "fa", "ur", "ps", "syr", "dv"];
+  const userLang = navigator.language || navigator.userLanguage;
+  const langCode = userLang.split("-")[0];
+
+  if (rtlLangs.includes(langCode)) {
+    document.documentElement.setAttribute("dir", "rtl");
+  } else {
+    document.documentElement.setAttribute("dir", "ltr");
+  }
+});
+
 let selectedProducts =
   JSON.parse(localStorage.getItem("selectedProducts")) || [];
 let allProducts = [];
@@ -209,6 +222,36 @@ chatForm.addEventListener("submit", async (e) => {
     appendMessage("ai", "⚠️ Something went wrong. Try again soon.");
     console.error(err);
   }
+});
+
+function addChatMessage(sender, text) {
+  const chatWindow = document.querySelector(".chat-window");
+
+  // Create message container
+  const msgDiv = document.createElement("div");
+  msgDiv.classList.add("msg", sender);
+
+  // Create bubble div
+  const bubbleDiv = document.createElement("div");
+  bubbleDiv.classList.add("bubble");
+  bubbleDiv.textContent = text;
+
+  // Append bubble to message div
+  msgDiv.appendChild(bubbleDiv);
+
+  // Append message to chat window
+  chatWindow.appendChild(msgDiv);
+
+  // Scroll to bottom so new message is visible
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+// Call this when your page or chat is initialized:
+window.addEventListener("DOMContentLoaded", () => {
+  addChatMessage(
+    "ai",
+    "Hi! I’m your L’Oréal chatbot here to help you build the perfect routine. 😊"
+  );
 });
 
 // Search input (unchanged)
